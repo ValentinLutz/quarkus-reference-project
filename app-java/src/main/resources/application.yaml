@@ -1,0 +1,21 @@
+greeting:
+  message: "Hello Java RESTEasy"
+
+
+### DEV ###
+"%dev":
+  quarkus:
+    log:
+      level: DEBUG
+
+### INT ###
+"%int":
+  quarkus:
+    log:
+      level: INFO
+
+### PROD ###
+"%prod":
+  quarkus:
+    log:
+      level: WARN
