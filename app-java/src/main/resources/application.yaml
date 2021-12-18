@@ -1,21 +1,15 @@
-greeting:
-  message: "Hello Java RESTEasy"
-
-
-### DEV ###
-"%dev":
-  quarkus:
-    log:
-      level: DEBUG
-
-### INT ###
-"%int":
-  quarkus:
-    log:
-      level: INFO
-
-### PROD ###
-"%prod":
-  quarkus:
-    log:
-      level: WARN
+quarkus:
+  http:
+    root-path: /
+    non-application-root-path: /
+  health:
+    openapi:
+      included: true
+  smallrye-health:
+    root-path: health
+  swagger-ui:
+    enable: true
+    theme: original
+    urls:
+      health-v1: openapi-health-v1.json
+      order-v1: openapi-order-v1-generated.json

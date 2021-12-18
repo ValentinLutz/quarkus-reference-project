@@ -14,40 +14,82 @@
     <artifactId>app-java</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <!-- OPENAPI -->
+        <swagger-maven-plugin.output-path>
+            ${project.basedir}/src/main/resources/META-INF/resources/swagger-ui
+        </swagger-maven-plugin.output-path>
+        <swagger-maven-plugin.config-base-path>
+            ${project.basedir}/src/main/openapi
+        </swagger-maven-plugin.config-base-path>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jacoco</artifactId>
-        </dependency>
+        <!-- CONFIGURATION -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-config-yaml</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
+
+        <!-- DEPENDENCY INJECTION -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
 
+        <!-- REST -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-reactive</artifactId>
+        </dependency>
+
+        <!-- HEALTH -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+
+        <!-- OPENAPI UI -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+
+        <!-- OPENAPI GENERATION -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-maven-plugin.version}</version>
+        </dependency>
+
+        <!-- LOMBOK -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- DATABASE -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm-panache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+
+        <!-- UNIT TESTS -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- CODE COVERAGE -->
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jacoco</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -85,6 +127,38 @@
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <!-- OPENAPI GENERATION -->
+            <plugin>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>${swagger-maven-plugin.version}</version>
+                <configuration>
+                    <outputPath>${swagger-maven-plugin.output-path}</outputPath>
+                    <outputFormat>JSON</outputFormat>
+                    <prettyPrint>true</prettyPrint>
+                </configuration>
+                <executions>
+                    <!-- ORDER V1 API-->
+                    <execution>
+                        <id>order-v1</id>
+                        <configuration>
+                            <configurationFilePath>
+                                ${swagger-maven-plugin.config-base-path}/order-v1-config.yaml
+                            </configurationFilePath>
+                            <contextId>authentication-v1</contextId>
+                            <outputFileName>openapi-order-v1-generated</outputFileName>
+                            <resourcePackages>
+                                <package>science.monke.api.order</package>
+                            </resourcePackages>
+                        </configuration>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

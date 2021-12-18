@@ -23,12 +23,16 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- Quarkus -->
+        <!-- QUARKUS -->
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>2.3.1.Final</quarkus.platform.version>
-        <!-- Surefire -->
+        <!-- SUREFIRE -->
         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+        <!-- OPENAPI -->
+        <swagger-maven-plugin.version>2.1.11</swagger-maven-plugin.version>
+        <!-- LOMBOK -->
+        <lombok.version>1.18.22</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -46,12 +50,6 @@
     <profiles>
         <profile>
             <id>dev</id>
-        </profile>
-        <profile>
-            <id>int</id>
-        </profile>
-        <profile>
-            <id>prod</id>
         </profile>
         <profile>
             <id>native</id>

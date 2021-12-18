@@ -1,0 +1,12 @@
+quarkus:
+  http:
+    host: 0.0.0.0
+  log:
+    level: INFO
+
+  # DATABASE
+  datasource:
+    username: dev_user
+    password: dev_password
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/dev_db
