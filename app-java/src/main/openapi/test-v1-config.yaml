@@ -1,0 +1,4 @@
+openAPI:
+  info:
+    version: 1.0.0
+    title: Test V1 API

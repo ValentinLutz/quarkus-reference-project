@@ -1,0 +1,55 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Test V1 API",
+    "version" : "1.0.0"
+  },
+  "paths" : {
+    "/test/billing" : {
+      "post" : {
+        "tags" : [ "Test" ],
+        "operationId" : "postBillingSQS",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/test/shipping" : {
+      "post" : {
+        "tags" : [ "Test" ],
+        "operationId" : "postShippingSQS",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    }
+  }
+}

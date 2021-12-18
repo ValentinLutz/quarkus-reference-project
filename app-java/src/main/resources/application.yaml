@@ -13,3 +13,4 @@ quarkus:
     urls:
       health-v1: openapi-health-v1.json
       order-v1: openapi-order-v1-generated.json
+      test-v1: openapi-test-v1-generated.json

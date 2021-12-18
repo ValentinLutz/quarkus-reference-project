@@ -80,18 +80,44 @@
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
 
+        <!-- SCHEDULER -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-scheduler</artifactId>
+        </dependency>
+
+        <!-- AWS -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-amazon-sqs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-amazon-sns</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>url-connection-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>netty-nio-client</artifactId>
+        </dependency>
+
         <!-- UNIT TESTS -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- CODE COVERAGE -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jacoco</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -147,10 +173,28 @@
                             <configurationFilePath>
                                 ${swagger-maven-plugin.config-base-path}/order-v1-config.yaml
                             </configurationFilePath>
-                            <contextId>authentication-v1</contextId>
+                            <contextId>order-v1</contextId>
                             <outputFileName>openapi-order-v1-generated</outputFileName>
                             <resourcePackages>
                                 <package>science.monke.api.order</package>
+                            </resourcePackages>
+                        </configuration>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                    </execution>
+                    <!-- TEST V1 API-->
+                    <execution>
+                        <id>test-v1</id>
+                        <configuration>
+                            <configurationFilePath>
+                                ${swagger-maven-plugin.config-base-path}/test-v1-config.yaml
+                            </configurationFilePath>
+                            <contextId>test-v1</contextId>
+                            <outputFileName>openapi-test-v1-generated</outputFileName>
+                            <resourcePackages>
+                                <package>science.monke.api.test</package>
                             </resourcePackages>
                         </configuration>
                         <phase>compile</phase>

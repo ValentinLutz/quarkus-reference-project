@@ -17,10 +17,10 @@ dev-docker-down:: ## shutdown docker containers for local dev
 	docker-compose -p quarkus-reference-project -f deployment-local/docker-compose.yaml down
 
 dev-java:: ## start the java app locally
-	./mvnw quarkus:dev -pl app-java
+	./mvnw compile quarkus:dev -pl app-java
 
 dev-kotlin:: ## start the kotlin app locally
-	./mvnw quarkus:dev -pl app-kotlin
+	./mvnw compile quarkus:dev -pl app-kotlin
 
 dev-scala:: ## start the scala app locally
-	./mvnw quarkus:dev -pl app-scala
+	./mvnw compile quarkus:dev -pl app-scala

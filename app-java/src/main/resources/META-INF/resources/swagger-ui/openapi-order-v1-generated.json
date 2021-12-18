@@ -29,19 +29,30 @@
             }
           }
         }
+      }
+    },
+    "/orders" : {
+      "get" : {
+        "tags" : [ "Orders" ],
+        "operationId" : "getOrders",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/OrderDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "post" : {
         "tags" : [ "Orders" ],
         "operationId" : "postOrder",
-        "parameters" : [ {
-          "name" : "orderId",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        } ],
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -63,26 +74,6 @@
           }
         }
       }
-    },
-    "/orders" : {
-      "get" : {
-        "tags" : [ "Orders" ],
-        "operationId" : "getOrders",
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/OrderDTO"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components" : {
@@ -93,6 +84,10 @@
           "status" : {
             "type" : "string",
             "enum" : [ "ORDER_PLACED", "ORDER_IN_PROGRESS", "ORDER_CANCELED", "ORDER_COMPLETED" ]
+          },
+          "orderId" : {
+            "type" : "string",
+            "format" : "uuid"
           },
           "items" : {
             "type" : "array",
@@ -109,6 +104,15 @@
             "type" : "string"
           }
         }
+      },
+      "UniOrderDTO" : {
+        "type" : "object"
+      },
+      "UniListOrderDTO" : {
+        "type" : "object"
+      },
+      "UniResponse" : {
+        "type" : "object"
       },
       "NewOrderDTO" : {
         "type" : "object",
